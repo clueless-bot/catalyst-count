@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Token Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <form id="registrationForm" method="POST" action="/accounts/signup/">
+            <!-- Email Input -->
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                    placeholder="Enter email" required>
+                <div class="invalid-feedback">
+                    Please enter your email.
+                </div>
+            </div>
+
+            <!-- Username Input -->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username"
+                    required>
+                <div class="invalid-feedback">
+                    Please enter a username.
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-group">
+                <label for="password1">Password</label>
+                <input type="password" class="form-control" id="password1" name="password1" placeholder="Password"
+                    required>
+                <div class="invalid-feedback">
+                    Please enter a password.
+                </div>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <input type="password" class="form-control" id="password2" name="password2"
+                    placeholder="Confirm Password" required>
+                <div class="invalid-feedback">
+                    Please confirm your password.
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function submitForm() {
+            const form = document.getElementById('registrationForm');
+            if (form.checkValidity()) {
+                const formData = new FormData(form);
+                fetch('http://127.0.0.1:8000/api/csrf/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const csrfToken = data.csrfToken;
+                        formData.append('csrfmiddlewaretoken', csrfToken);
+                        fetch('http://127.0.0.1:8000/accounts/signup/', {
+                            method: 'POST',
+                            body: formData,
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    window.location.replace("http://127.0.0.1:8000/accounts/login/");
+                                } else {
+                                    throw new Error('Signup request failed.');
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Success:', data);
+                            })
+                            .catch((error) => {
+                                console.error('Error:', error);
+                            });
+                    })
+                    .catch(error => console.error('Error fetching CSRF token:', error));
+            } else {
+                form.classList.add('was-validated');
+            }
+        }
+    </script>
+</body>
+
+</html>
