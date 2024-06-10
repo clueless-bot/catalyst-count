@@ -87,11 +87,7 @@
                         })
                             .then(response => {
                                 if (response.ok) {
-                                    if (response.status === 302) {
-                                        window.location.replace("http://127.0.0.1:8000/dashboard/");
-                                    } else {
-                                        throw new Error('Login request failed.');
-                                    }
+                                    window.location.replace("http://127.0.0.1:8000/csv/import-csv/");
                                 } else {
                                     throw new Error('Login request failed.');
                                 }

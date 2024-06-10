@@ -16,3 +16,8 @@ def signup_view(request):
 def login_view(request):
     # Handle signup logic here if needed
     return render(request, "account/login.html")
+
+
+def dashboard_view(request):
+    # Handle signup logic here if needed
+    return render(request, "account/dashboard.html")

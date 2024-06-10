@@ -63,7 +63,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "corsheaders",
-    "catalyst_count",
+    "upload_data",
+    "query_builder",
 ]
 
 
@@ -124,13 +125,6 @@ WSGI_APPLICATION = 'catalyst_count.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -188,3 +182,21 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 
 CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000", "http://localhost:8000"]
+
+
+# settings.py
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2147483648
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2147483648
+
+
+# settings.py
+
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
+import os
+
+# os.environ["DJANGO_SETTINGS_MODULE"] = "upload_data.settings"
