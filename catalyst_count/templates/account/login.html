@@ -86,7 +86,7 @@
                             body: formData,
                         })
                             .then(response => {
-                                if (response.ok) {
+                                if (response.status == 200) {
                                     window.location.replace("http://127.0.0.1:8000/csv/import-csv/");
                                 } else {
                                     throw new Error('Login request failed.');

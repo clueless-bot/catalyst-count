@@ -28,4 +28,5 @@ urlpatterns = [
     path("", views.dashboard_view, name="dashboard"),
     path("csv/", include("upload_data.urls")),
     path("filter/", include("query_builder.urls")),
+    path("users/", include("users.urls")),
 ]
