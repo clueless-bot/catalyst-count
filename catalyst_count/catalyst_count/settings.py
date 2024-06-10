@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "upload_data",
     "query_builder",
+    "users"
 ]
 
 
@@ -197,6 +198,4 @@ LOGOUT_REDIRECT_URL = "/accounts/login/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
-import os
 
-# os.environ["DJANGO_SETTINGS_MODULE"] = "upload_data.settings"
