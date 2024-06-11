@@ -95,7 +95,7 @@
 
                 // Show progress bar and log to console
                 $('.progress').show();
-                console.log("Progress bar displayed");
+                // console.log("Progress bar displayed");
 
                 var formData = new FormData();
                 formData.append('csv_file', $('#csvFile')[0].files[0]);
@@ -114,9 +114,17 @@
                                 xhr.upload.addEventListener("progress", function (evt) {
                                     if (evt.lengthComputable) {
                                         var percentComplete = Math.round((evt.loaded / evt.total) * 100);
-                                        console.log('Progress: ' + percentComplete + '%');
-                                        $('#progressBar').width(percentComplete + '%');
-                                        $('#progressBar').html(percentComplete + '%');
+                                        if (percentComplete < 90) {
+                                            $('#progressBar').width(percentComplete + '%');
+                                            $('#progressBar').html(percentComplete + '%');
+                                        } else {
+                                            $('#progressBar').width('90%');
+                                            $('#progressBar').html('90%');
+                                        }
+                                        // console.log('Progress: ' + percentComplete + '%');
+
+
+
                                     }
                                 }, false);
                                 return xhr;
@@ -127,21 +135,27 @@
                             processData: false,
                             contentType: false,
                             success: function (response) {
-                                // Handle successful upload
-                                alert('File uploaded and data saved successfully!');
-                                $('#progressBar').width('0%');
-                                $('#progressBar').html('0%');
-                                // $('.progress').hide();
+                                // Check for successful response
+                                if (response.status === 200) {
+                                    $('#progressBar').width('100%');
+                                    $('#progressBar').html('100%');
+                                    alert('File uploaded and data saved successfully!');
+                                } 
                             },
                             error: function (xhr, status, error) {
                                 // Handle upload error
                                 console.error('Error uploading file:', error);
                                 alert('Error uploading file!');
-                                // $('.progress').hide();
+                            },
+                            complete: function () {
+                                $('#uploadForm')[0].reset();
+                                setTimeout(() => {
+                                    $('#progressBar').width('0%');
+                                    $('#progressBar').html('0%');
+                                    $('.progress').hide();
+                                }, 2000);
                             }
                         });
-
-                        $('#uploadForm')[0].reset();
                     })
                     .catch(error => {
                         console.error('Error fetching CSRF token:', error);
