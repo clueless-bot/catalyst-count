@@ -1,0 +1,10 @@
+env
+.env
+debug.log
+venv
+catalyst_count/catalyst_count/__pycache__
+catalyst_count/query_builder/__pycache__
+catalyst_count/upload_data/__pycache__
+catalyst_count/upload_data/migrations
+catalyst_count/users/__pycache__
+catalyst_count/media
