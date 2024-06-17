@@ -9,15 +9,15 @@ def get_csrf_token(request):
 
 
 def signup_view(request):
-    # Handle signup logic here if needed
+    
     return render(request, "account/signup.html")
 
 
 def login_view(request):
-    # Handle signup logic here if needed
+    
     return render(request, "account/login.html")
 
 
 def dashboard_view(request):
-    # Handle signup logic here if needed
+    
     return render(request, "account/dashboard.html")
