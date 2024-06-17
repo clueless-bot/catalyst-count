@@ -7,6 +7,7 @@ Then follow these commands
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py runserver
+- celery -A catalyst_count worker --loglevel=info
 
 Below is the url to signup
 
