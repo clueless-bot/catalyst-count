@@ -11,7 +11,7 @@ urlpatterns = [
     path("accounts/signup/", views.signup_view, name="signup"),
     path("accounts/login/", views.login_view, name="login"),
     path("", views.dashboard_view, name="dashboard"),
-    path("csv/", include("upload_data.urls")),
-    path("filter/", include("query_builder.urls")),
-    path("users/", include("users.urls")),
+    path("csv/", include("apps.upload_data.urls")),
+    path("filter/", include("apps.query_builder.urls")),
+    path("users/", include("apps.users.urls")),
 ]

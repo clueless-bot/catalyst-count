@@ -8,3 +8,6 @@ catalyst_count/upload_data/__pycache__
 catalyst_count/upload_data/migrations
 catalyst_count/users/__pycache__
 catalyst_count/media
+catalyst_count/media/uploads
+__pycache__
+catalyst_count/apps/uploads/companies_sorted.csv

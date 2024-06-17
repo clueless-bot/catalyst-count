@@ -1,8 +1,7 @@
 from pathlib import Path
 import environ
 import os
-
-
+from decouple import config
 
 
 env = environ.Env(DEBUG=(bool, False))
@@ -12,11 +11,11 @@ environ.Env.read_env("/home/bot/Desktop/Workspace-Catalyst/.env")
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "catalystdb",
-        "USER": "catalyst",
-        "PASSWORD": "catalyst",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": config('DATABASE_NAME'),
+        "USER": config('DATABASE_USER'),
+        "PASSWORD": config('DATABASE_PASSWORD'),
+        "HOST": config('DATABASE_HOST'),
+        "PORT": config('DATABASE_PORT'),
     }
 }
 
@@ -48,9 +47,9 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "corsheaders",
-    "upload_data",
-    "query_builder",
-    "users"
+    "apps.upload_data",
+    "apps.query_builder",
+    "apps.users",
 ]
 
 

@@ -83,6 +83,7 @@ pyspark==3.5.1
 python-apt==2.7.7+ubuntu1
 python-dateutil==2.9.0.post0
 python-debian==0.1.49+ubuntu2
+python-decouple==3.8
 python-memcached==1.58
 pytz==2024.1
 pyxdg==0.28
