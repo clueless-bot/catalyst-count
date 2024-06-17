@@ -6,6 +6,7 @@ import aiofiles
 from aiocsv import AsyncReader
 from celery import shared_task
 from .models import Data
+from decouple import config
 
 @shared_task
 def process_csv_file(file_path):
@@ -15,10 +16,10 @@ def process_csv_file(file_path):
 async def process_csv(file_path):
     chunk_size = 100000  
     conn = await asyncpg.connect(
-    user = os.environ.get('DATABASE_USER'),
-    password = os.environ.get('DATABASE_PASSWORD'),
-    database = os.environ.get('DATABASE_NAME'),
-    host = os.environ.get('DATABASE_HOST'),
+    user = config('DATABASE_USER'),
+    password = config('DATABASE_PASSWORD'),
+    database = config('DATABASE_NAME'),
+    host = config('DATABASE_HOST'),
     )
 
     async def safe_int(value):

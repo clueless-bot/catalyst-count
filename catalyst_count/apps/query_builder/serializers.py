@@ -1,6 +1,6 @@
 # serializers.py
 from rest_framework import serializers
-from upload_data.models import Data
+from apps.upload_data.models import Data
 
 
 class UniqueValuesSerializer(serializers.Serializer):

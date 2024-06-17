@@ -7,7 +7,7 @@ def query_builder(request):
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Min, Max
-from upload_data.models import Data
+from apps.upload_data.models import Data
 from .serializers import UniqueValuesSerializer
 from django.db.models import Q
 
