@@ -1,5 +1,3 @@
-# csv_import/urls.py
-
 from django.urls import path
 from . import views
 

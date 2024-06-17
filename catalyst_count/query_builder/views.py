@@ -1,11 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
 def query_builder(request):
     return render(request, "query.html")
 
 
-# views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Min, Max
@@ -45,7 +43,6 @@ class UniqueValuesView(APIView):
 
 class UserSearchView(APIView):
     def get(self, request):
-        # Get query parameters from request
         keyword = request.query_params.get("keyword", "")
         industry = request.query_params.get("industry", "")
         year_founded = request.query_params.get("year_founded", "")
@@ -86,9 +83,6 @@ class UserSearchView(APIView):
                 total_employee_estimate__gte=employees_from,
                 total_employee_estimate__lte=employees_to,
             )
-
-        
-        # print(queryset.query)
 
         
         user_count = queryset.count()
